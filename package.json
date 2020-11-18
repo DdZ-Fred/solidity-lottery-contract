@@ -1,0 +1,27 @@
+{
+  "name": "solidity-lottery-contract",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:DdZ-Fred/solidity-lottery-contract.git",
+  "author": "Frederic REY <frederic.rey.pro@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@truffle/hdwallet-provider": "^1.2.0",
+    "dotenv": "^8.2.0",
+    "patch-package": "^6.2.2",
+    "postinstall-postinstall": "^2.1.0",
+    "solc": "^0.7.5",
+    "truffle": "^5.1.53",
+    "web3": "^1.3.0"
+  },
+  "devDependencies": {
+    "@openzeppelin/test-environment": "^0.1.6",
+    "@types/jest": "^26.0.15",
+    "eslint": "^7.13.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-vue": "^7.1.0",
+    "jest": "^26.6.3"
+  }
+}
