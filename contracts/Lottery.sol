@@ -9,7 +9,7 @@ contract Lottery {
         return players;
     }
 
-    constructor() public {
+    constructor() {
         manager = msg.sender;
     }
     
@@ -20,18 +20,22 @@ contract Lottery {
         players.push(msg.sender);
     }
     
-    function pickWinner() public {
-        require(msg.sender == manager,"Only the manager can pick a winner.");
-        require(players.length > 2, "Not enough players, minimum is 2.");
+    function pickWinner() public managerOnly {
+        // require(msg.sender == manager,"Only the manager can pick a winner.");
+        require(players.length > 2, "Not enough players, minimum is 3.");
         
         uint winnerIndex = random() % players.length;
         players[winnerIndex].transfer(address(this).balance);
         players = new address payable[](0);
     }
+    modifier managerOnly {
+        require(msg.sender == manager, "Only the manager can pick a winner.");
+        _;
+    }
     
     function random() private view returns (uint) {
         // abi.encodePacked: encode given arguments into bytes
-        return uint(keccak256(abi.encodePacked(block.difficulty, now, players)));
+        return uint(keccak256(abi.encodePacked(block.difficulty, block.timestamp, players)));
     }
 }
 
