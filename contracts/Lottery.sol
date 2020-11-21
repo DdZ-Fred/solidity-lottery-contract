@@ -2,7 +2,36 @@
 pragma solidity >=0.4.22 <0.8.0;
 
 contract Lottery {
-  address manager;
+    address public manager;
+    address payable[] public players;
 
-  constructor()
+    function getPlayers() public view returns (address payable[] memory) {
+        return players;
+    }
+
+    constructor() public {
+        manager = msg.sender;
+    }
+    
+    function enter() public payable {
+        require(msg.sender != manager, "The manager cannot participate to the lottery.");
+        require(msg.value >= 1000000 wei, "The minimum amount is 1000000 wei.");
+        
+        players.push(msg.sender);
+    }
+    
+    function pickWinner() public {
+        require(msg.sender == manager,"Only the manager can pick a winner.");
+        require(players.length > 2, "Not enough players, minimum is 2.");
+        
+        uint winnerIndex = random() % players.length;
+        players[winnerIndex].transfer(address(this).balance);
+        players = new address payable[](0);
+    }
+    
+    function random() private view returns (uint) {
+        // abi.encodePacked: encode given arguments into bytes
+        return uint(keccak256(abi.encodePacked(block.difficulty, now, players)));
+    }
 }
+
