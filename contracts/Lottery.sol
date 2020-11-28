@@ -15,6 +15,7 @@ contract Lottery {
     
     function enter() public payable {
         require(msg.sender != manager, "The manager cannot participate to the lottery.");
+        // TODO: Check if user isn't already in the list
         require(msg.value >= 1000000 wei, "The minimum amount is 1000000 wei.");
         
         players.push(msg.sender);

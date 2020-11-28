@@ -4,8 +4,8 @@
   "main": "index.js",
   "scripts": {
     "compile": "truffle compile",
-    "test": "yarn compile && jest",
-    "test:watch": "yarn compile && jest --watch --verbose"
+    "test": "jest",
+    "test:watch": "jest --watch --verbose"
   },
   "repository": "git@github.com:DdZ-Fred/solidity-lottery-contract.git",
   "author": "Frederic REY <frederic.rey.pro@gmail.com>",
